@@ -1,7 +1,8 @@
 Elk::Application.routes.draw do
 
-  resources :builds
+  resources :apps
 
+  get '/:appname' => 'apps#show'
 
   root :to => 'builds#index'
   

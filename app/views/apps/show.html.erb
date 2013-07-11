@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @app.name %>
+</p>
+
+<p>
+  <b>Builds:</b>
+  <% @app.builds.each do |build| %>
+    <br />
+    Version: <%= build.version %>
+    <br />
+    Build #: <%= build.build_number %>
+    <br />
+    Release Notes: <%= build.release_notes %>
+  <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_app_path(@app) %> |
+<%= link_to 'Back', apps_path %>
