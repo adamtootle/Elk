@@ -1,3 +1,6 @@
 class Build < ActiveRecord::Base
-  attr_accessible :build_number, :release_notes, :version
+
+  mount_uploader :file, BuildUploader
+
+  attr_accessible :build_number, :release_notes, :version, :file
 end

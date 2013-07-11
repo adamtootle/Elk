@@ -5,6 +5,7 @@
     <th>Version</th>
     <th>Build number</th>
     <th>Release notes</th>
+    <th>File</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,6 +16,7 @@
     <td><%= build.version %></td>
     <td><%= build.build_number %></td>
     <td><%= build.release_notes %></td>
+    <td><%= link_to "Build", build.file_url %></td>
     <td><%= link_to 'Show', build %></td>
     <td><%= link_to 'Edit', edit_build_path(build) %></td>
     <td><%= link_to 'Destroy', build, method: :delete, data: { confirm: 'Are you sure?' } %></td>
