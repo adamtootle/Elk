@@ -1,4 +1,10 @@
 Elk::Application.routes.draw do
+
+  resources :builds
+
+
+  root :to => 'builds#index'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

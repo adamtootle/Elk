@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Version:</b>
+  <%= @build.version %>
+</p>
+
+<p>
+  <b>Build number:</b>
+  <%= @build.build_number %>
+</p>
+
+<p>
+  <b>Release notes:</b>
+  <%= @build.release_notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_build_path(@build) %> |
+<%= link_to 'Back', builds_path %>

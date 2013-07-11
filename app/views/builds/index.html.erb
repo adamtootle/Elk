@@ -1,0 +1,27 @@
+<h1>Listing builds</h1>
+
+<table>
+  <tr>
+    <th>Version</th>
+    <th>Build number</th>
+    <th>Release notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @builds.each do |build| %>
+  <tr>
+    <td><%= build.version %></td>
+    <td><%= build.build_number %></td>
+    <td><%= build.release_notes %></td>
+    <td><%= link_to 'Show', build %></td>
+    <td><%= link_to 'Edit', edit_build_path(build) %></td>
+    <td><%= link_to 'Destroy', build, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Build', new_build_path %>
