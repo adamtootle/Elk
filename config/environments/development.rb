@@ -34,4 +34,6 @@ Elk::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.root_domain = "http://192.168.1.146:3000"
 end

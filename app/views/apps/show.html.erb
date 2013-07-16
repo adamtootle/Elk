@@ -14,6 +14,8 @@
     Build #: <%= build.build_number %>
     <br />
     Release Notes: <%= build.release_notes %>
+    <br />
+    Install: <a href="itms-services://?action=download-manifest&url=<%= Rails.configuration.root_domain + build.plist_url %>">Install</a>
   <% end %>
 </p>
 

@@ -23,6 +23,8 @@ end
 gem 'jquery-rails'
 
 gem 'carrierwave'
+gem 'ipa_reader'
+gem 'nokogiri'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
