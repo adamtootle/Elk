@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Elk</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Elk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<%= yield %>
+    <%#= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
 
-</body>
+    <!-- Bootstrap -->
+    <link href="/assets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/assets/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+    <%= render 'includes/menu' %>
+
+    <div class="container">
+      <%= yield =%>
+    </div>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="/assets/bootstrap.min.js"></script>
+  </body>
 </html>
