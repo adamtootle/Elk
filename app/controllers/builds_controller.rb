@@ -25,6 +25,7 @@ class BuildsController < ApplicationController
   # GET /builds/new.json
   def new
     @build = Build.new
+    @apps = App.all
 
     respond_to do |format|
       format.html # new.html.erb

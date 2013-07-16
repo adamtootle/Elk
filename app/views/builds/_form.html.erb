@@ -24,6 +24,14 @@
     <%= f.text_area :release_notes %>
   </div>
   <div class="field">
+    <%= f.label :app_id %><br />
+    <select name="build[app_id]">
+      <% @apps.each do |app| %>
+        <option value="<%= app.id %>"><%= app.name %></option>
+      <% end %>
+    </select>
+  </div>
+  <div class="field">
     <%= f.label :file %><br />
     <%= f.file_field :file %>
   </div>
