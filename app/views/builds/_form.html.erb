@@ -1,3 +1,4 @@
+
 <%= form_for(@build) do |f| %>
   <% if @build.errors.any? %>
     <div id="error_explanation">
@@ -11,17 +12,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :version %><br />
-    <%= f.text_field :version %>
-  </div>
-  <div class="field">
-    <%= f.label :build_number %><br />
-    <%= f.text_field :build_number %>
-  </div>
-  <div class="field">
+  <div class="field spacer">
     <%= f.label :release_notes %><br />
-    <%= f.text_area :release_notes %>
+    <%= f.text_area :release_notes, :class => "span5", :rows => 5 %>
   </div>
   <div class="field">
     <%= f.label :app_id %><br />
@@ -31,11 +24,34 @@
       <% end %>
     </select>
   </div>
-  <div class="field">
+  <div class="field file-drag">
     <%= f.label :file %><br />
-    <%= f.file_field :file %>
+    <%#= f.file_field :file %>
+    drag .ipa file here
   </div>
+  <%= f.text_field :version, :class => :hidden %>
+  <%= f.text_field :build_number, :class => :hidden %>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script src="/assets/dropzone.js"></script>
+<script type="text/javascript">
+  Dropzone.options.fileDrag = {
+    init: function() {
+      this.on("dragenter", function(file){
+        $("#build_file").parent().addClass("file-drag-hover");
+      });
+      this.on("dragleave", function(file){
+        $("#build_file").parent().removeClass("file-drag-hover");
+      });
+      this.on("addedfile", function(file){
+        console.log('added file');
+      });
+    }
+  };
+  $(document).ready(function(){
+    var myDropzone = new Dropzone(".file-drag", { url: "/file/post"});
+  });
+</script>
