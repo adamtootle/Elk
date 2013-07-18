@@ -36,4 +36,6 @@ Elk::Application.configure do
   config.assets.debug = true
 
   config.root_domain = "http://192.168.1.146:3000"
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
