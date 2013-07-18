@@ -17,4 +17,9 @@ class Build < ActiveRecord::Base
   def ipa
     IpaReader::IpaFile.new(self.file.path)
   end
+
+  def friendly_create_at
+    "#{self.created_at.month}/#{self.created_at.day}/#{self.created_at.year} - " +
+    "#{self.created_at.hour}:#{self.created_at.min}#{self.created_at.strftime('%P')}"
+  end
 end

@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="/assets/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/assets/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="/assets/custom.css" rel="stylesheet" media="screen">
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -31,7 +32,14 @@
     <% end %>
 
     <div class="container">
-      <%= yield =%>
+      <div class="row">
+        <div class="span2 visible-desktop spacer">
+          <%= render 'includes/sidemenu' %>
+        </div>
+        <div class="span9 spacer">
+          <%= yield =%>
+        </div>
+      </div>
     </div>
 
     <script src="http://code.jquery.com/jquery.js"></script>

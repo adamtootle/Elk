@@ -1,23 +1,35 @@
-<h1>Listing apps</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @apps.each do |app| %>
-  <tr>
-    <td><%= app.name %></td>
-    <td><%= link_to 'Show', app %></td>
-    <td><%= link_to 'Edit', edit_app_path(app) %></td>
-    <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<h1>My apps</h1>
 
 <br />
 
-<%= link_to 'New App', new_app_path %>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Latest Version</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @apps.each do |app| %>
+      <tr>
+        <td>
+          <%= link_to app.name, app_path(app) %>
+        </td>
+        <td>
+          <%= "#{app.builds.last.version} (#{app.builds.last.build_number})" %>
+        </td>
+        <td>
+          <a href="itms-services://?action=download-manifest&url=<%= Rails.configuration.root_domain + app.builds.last.plist_url %>" class="btn btn-primary hidden-desktop">
+            Install Latest Version
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+<br />
+
+<%= link_to 'Add new app', new_app_path %>

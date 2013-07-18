@@ -26,7 +26,7 @@
   <div class="field">
     <%= f.label :app_id %><br />
     <select name="build[app_id]">
-      <% @apps.each do |app| %>
+      <% current_user.apps.each do |app| %>
         <option value="<%= app.id %>"><%= app.name %></option>
       <% end %>
     </select>
