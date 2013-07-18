@@ -3,6 +3,8 @@ Elk::Application.routes.draw do
   resources :builds
   resources :apps
 
+  get '*\.mobileconfig' => 'xml#mobileconfig'
+  post 'register_device' => 'xml#register_device'
   get '/:appname' => 'apps#show'
 
   root :to => 'builds#index'
