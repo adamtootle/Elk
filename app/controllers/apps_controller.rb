@@ -1,11 +1,11 @@
 class AppsController < ApplicationController
 
   before_filter :authenticate_user!
-  
+
   # GET /apps
   # GET /apps.json
   def index
-    @apps = App.all
+    @apps = current_user.apps
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +17,7 @@ class AppsController < ApplicationController
   # GET /apps/1.json
   def show
     if(params.has_key?(:id))
-      @app = App.find(params[:id])
+      @app = App.find_by_name(params[:id])
     else
       @app = App.where("lower(name) = ?", params[:appname].downcase).first
     end
@@ -41,13 +41,15 @@ class AppsController < ApplicationController
 
   # GET /apps/1/edit
   def edit
-    @app = App.find(params[:id])
+    @app = App.find_by_name(params[:id])
   end
 
   # POST /apps
   # POST /apps.json
   def create
     @app = App.new(params[:app])
+
+    current_user.add_app @app
 
     respond_to do |format|
       if @app.save
@@ -63,7 +65,7 @@ class AppsController < ApplicationController
   # PUT /apps/1
   # PUT /apps/1.json
   def update
-    @app = App.find(params[:id])
+    @app = App.find_by_name(params[:id])
 
     respond_to do |format|
       if @app.update_attributes(params[:app])
@@ -79,7 +81,7 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   # DELETE /apps/1.json
   def destroy
-    @app = App.find(params[:id])
+    @app = App.find_by_name(params[:id])
     @app.destroy
 
     respond_to do |format|
