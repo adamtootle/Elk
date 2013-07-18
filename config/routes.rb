@@ -5,6 +5,14 @@ Elk::Application.routes.draw do
 
   get '*\.mobileconfig' => 'xml#mobileconfig'
   post 'register_device' => 'xml#register_device'
+
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'login' => 'devise/sessions#new', :as => :new_user_session
+    post 'login' => 'devise/sessions#create', :as => :user_session
+    get 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   get '/:appname' => 'apps#show'
 
   root :to => 'builds#index'

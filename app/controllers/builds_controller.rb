@@ -1,4 +1,7 @@
 class BuildsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /builds
   # GET /builds.json
   def index
