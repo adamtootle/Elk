@@ -20,7 +20,7 @@ Elk::Application.routes.draw do
 
   get '/:appname' => 'apps#show'
 
-  root :to => 'builds#index'
+  root :to => redirect('/apps')
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
