@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718150322) do
+ActiveRecord::Schema.define(:version => 20130719072540) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -27,13 +27,19 @@ ActiveRecord::Schema.define(:version => 20130718150322) do
   add_index "apps_users", ["app_id", "user_id"], :name => "index_apps_users_on_app_id_and_user_id"
   add_index "apps_users", ["user_id"], :name => "index_apps_users_on_user_id"
 
+  create_table "build_uploads", :force => true do |t|
+    t.integer  "build_id"
+    t.string   "file"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "builds", :force => true do |t|
     t.string   "version"
     t.string   "build_number"
     t.text     "release_notes"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "file"
     t.integer  "app_id"
   end
 

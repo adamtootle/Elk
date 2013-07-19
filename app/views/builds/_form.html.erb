@@ -31,6 +31,7 @@
   </div>
   <%= f.text_field :version, :class => :hidden %>
   <%= f.text_field :build_number, :class => :hidden %>
+  <input id="upload_id" name="upload_id" type="text" class="hidden" />
   <div class="actions">
     <%= f.submit %>
   </div>
@@ -52,6 +53,16 @@
     }
   };
   $(document).ready(function(){
-    var myDropzone = new Dropzone(".file-drag", { url: "/file/post"});
+    var myDropzone = new Dropzone(".file-drag", {
+      url: "/builds/upload", 
+      headers: {
+        'X-CSRF-Token':$('meta[name="csrf-token"]').attr('content')
+      },
+      paramName: 'build_upload[file]',
+      success: function(file, response){
+        $("#upload_id").val(response.id);
+        console.log(response.id);
+      }
+    });
   });
 </script>

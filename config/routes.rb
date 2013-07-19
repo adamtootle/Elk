@@ -1,10 +1,15 @@
 Elk::Application.routes.draw do
 
+  get "build_uploads/new"
+
+  get "build_upload/new"
+
   resources :builds
   resources :apps
 
   get '*\.mobileconfig' => 'xml#mobileconfig'
   post 'register_device' => 'xml#register_device'
+  post '/builds/upload' => 'build_uploads#new'
 
   devise_for :users, :skip => [:sessions]
   as :user do

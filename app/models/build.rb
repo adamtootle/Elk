@@ -1,21 +1,20 @@
 class Build < ActiveRecord::Base
 
-  mount_uploader :file, BuildUploader
-
   belongs_to :app
+  has_one :upload, :class_name => BuildUpload
 
-  attr_accessible :build_number, :release_notes, :version, :file, :app_id
+  attr_accessible :build_number, :release_notes, :version, :app_id, :upload_id
 
   def plist_url
-    self.file.url.gsub(self.file.file.filename, '') + self.ipa.name + '.plist'
+    self.upload.file.url.gsub(self.upload.file.file.filename, '') + self.ipa.name + '.plist'
   end
 
   def plist_path
-    self.file.path.gsub(self.file.file.filename, '') + self.ipa.name + '.plist'
+    self.upload.file.path.gsub(self.upload.file.file.filename, '') + self.ipa.name + '.plist'
   end
 
   def ipa
-    IpaReader::IpaFile.new(self.file.path)
+    IpaReader::IpaFile.new(self.upload.file.path)
   end
 
   def friendly_create_at

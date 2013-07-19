@@ -46,8 +46,14 @@ class BuildsController < ApplicationController
   def create
     @build = Build.new(params[:build])
 
+    upload = BuildUpload.where(:id => params[:upload_id]).first
+    ipa = IpaReader::IpaFile.new(upload.file.path)
+    @build.version = ipa.version
+
     respond_to do |format|
       if @build.save
+        upload.build_id = @build.id
+        upload.save
         format.html { redirect_to @build, notice: 'Build was successfully created.' }
         format.json { render json: @build, status: :created, location: @build }
       else
@@ -82,6 +88,14 @@ class BuildsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to builds_url }
       format.json { head :no_content }
+    end
+  end
+
+  def upload
+    puts params
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: {} }
     end
   end
 end

@@ -52,7 +52,7 @@ class BuildUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  after :store, :create_plist
+  # after :store, :create_plist
 
   def create_plist(file)
     ipa = IpaReader::IpaFile.new(self.path)
