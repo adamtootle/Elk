@@ -17,12 +17,16 @@
           <%= link_to app.name, app_path(app) %>
         </td>
         <td>
-          <%= "#{app.builds.last.version} (##{app.builds.last.build_number})" %>
+          <% if(app.builds.count > 0) %>
+            <%= "#{app.builds.last.version} (##{app.builds.last.build_number})" %>
+          <% end %>
         </td>
         <td>
-          <a href="itms-services://?action=download-manifest&url=<%= Rails.configuration.root_domain + app.builds.last.plist_url %>" class="btn btn-primary hidden-desktop">
-            Install Latest Version
-          </a>
+          <% if(app.builds.count > 0) %>
+            <a href="itms-services://?action=download-manifest&url=<%= Rails.configuration.root_domain + app.builds.last.plist_url %>" class="btn btn-primary hidden-desktop">
+              Install Latest Version
+            </a>
+          <% end %>
         </td>
       </tr>
     <% end %>

@@ -7,3 +7,14 @@
   border-color: red;
   border-style: solid;
 }
+
+.dz-processing .dz-success-mark,
+.dz-processing .dz-error-mark,
+.dz-processing .dz-error-message {
+  display: none;
+}
+
+.dz-success .dz-error-mark,
+.dz-success .dz-error-message {
+  display: none;
+}

@@ -29,6 +29,11 @@
     <%#= f.file_field :file %>
     drag .ipa file here
   </div>
+  <div class="row">
+    <div class="progress progress-striped active hidden span5" id="build_upload_progress">
+      <div class="bar" style="width: 0%;"></div>
+    </div>
+  </div>
   <%= f.text_field :version, :class => :hidden %>
   <%= f.text_field :build_number, :class => :hidden %>
   <input id="upload_id" name="upload_id" type="text" class="hidden" />
@@ -59,9 +64,23 @@
         'X-CSRF-Token':$('meta[name="csrf-token"]').attr('content')
       },
       paramName: 'build_upload[file]',
+      sending: function(){
+        $("#build_upload_progress").removeClass('hidden');
+        console.log('sending');
+      },
+      uploadprogress: function(file, progress, bytessent){
+        $("#build_upload_progress .bar").css('width', progress + '%');
+        if(progress == 100)
+        {
+          setTimeout(function(){
+            $("#build_upload_progress").addClass('hidden');
+          }, 2000);
+        }
+      },
       success: function(file, response){
         $("#upload_id").val(response.id);
         $("#build_submit").attr('disabled', false)
+        $(".dz-preview").removeClass('dz-processing').addClass('dz-success');
       }
     });
   });
