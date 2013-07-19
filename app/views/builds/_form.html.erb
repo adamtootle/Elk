@@ -33,7 +33,7 @@
   <%= f.text_field :build_number, :class => :hidden %>
   <input id="upload_id" name="upload_id" type="text" class="hidden" />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :id => "build_submit", :class => "btn", :disabled => :disabled %>
   </div>
 <% end %>
 
@@ -61,7 +61,7 @@
       paramName: 'build_upload[file]',
       success: function(file, response){
         $("#upload_id").val(response.id);
-        console.log(response.id);
+        $("#build_submit").attr('disabled', false)
       }
     });
   });
