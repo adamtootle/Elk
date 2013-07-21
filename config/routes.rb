@@ -8,6 +8,7 @@ Elk::Application.routes.draw do
   resources :apps
 
   get '*\.mobileconfig' => 'xml#mobileconfig'
+  get '/build-:id.plist' => 'xml#plist'
   post 'register_device' => 'xml#register_device'
   post '/builds/upload' => 'build_uploads#new'
 

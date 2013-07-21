@@ -50,7 +50,7 @@ class XmlController < ApplicationController
     @xml = builder.to_xml.html_safe
 
   	respond_to do |format|
-      format.html { render :content_type => "application/x-apple-aspen-config"} # index.html.erb
+      format.html { render :content_type => "application/x-apple-aspen-config" }
       format.json { render json: {} }
     end
   end
@@ -63,6 +63,54 @@ class XmlController < ApplicationController
     xml_doc = Nokogiri::XML(xml_string)
     hash = Hash.from_xml(xml_doc.root.children.to_xml)
     puts hash['dict']
+
+    respond_to do |format|
+      format.html
+      format.json { render json: {} }
+    end
+  end
+
+  def plist
+    @build = Build.find(params[:id])
+    
+    @builder = Nokogiri::XML::Builder.new do |xml|
+      xml.doc.create_internal_subset(
+        'plist',
+        "-//Apple//DTD PLIST 1.0//EN",
+        "http://www.apple.com/DTDs/PropertyList-1.0.dtd"
+      )
+      xml.plist(:version => "1.0") {
+        xml.dict {
+          xml.key "items"
+          xml.array {
+            xml.dict {
+              xml.key "assets"
+              xml.array {
+                xml.dict {
+                  xml.key "kind"
+                  xml.string "software-package"
+                  xml.key "url"
+                  xml.string @build.ipa_url
+                }
+              }
+              xml.key "metadata"
+              xml.dict {
+                xml.key "bundle-identifier"
+                xml.string @build.ipa.bundle_identifier
+                xml.key "bundle-version"
+                xml.string @build.ipa.version
+                xml.key "kind"
+                xml.string "software"
+                xml.key "title"
+                xml.string @build.upload.file.file.filename
+              }
+            }
+          }
+        }
+      }
+    end
+
+    puts @builder.to_xml(:indent => 4, :encoding => 'UTF-8')
 
     respond_to do |format|
       format.html

@@ -52,47 +52,4 @@ class BuildUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  # after :store, :create_plist
-
-  def create_plist(file)
-    ipa = IpaReader::IpaFile.new(self.path)
-    builder = Nokogiri::XML::Builder.new do |xml|
-      xml.doc.create_internal_subset(
-        'plist',
-        "-//Apple//DTD PLIST 1.0//EN",
-        "http://www.apple.com/DTDs/PropertyList-1.0.dtd"
-      )
-      xml.plist(:version => "1.0") {
-        xml.dict {
-          xml.key "items"
-          xml.array {
-            xml.dict {
-              xml.key "assets"
-              xml.array {
-                xml.dict {
-                  xml.key "kind"
-                  xml.string "software-package"
-                  xml.key "url"
-                  xml.string Rails.configuration.root_domain + self.url
-                }
-              }
-              xml.key "metadata"
-              xml.dict {
-                xml.key "bundle-identifier"
-                xml.string ipa.bundle_identifier
-                xml.key "bundle-version"
-                xml.string ipa.version
-                xml.key "kind"
-                xml.string "software"
-                xml.key "title"
-                xml.string self.filename
-              }
-            }
-          }
-        }
-      }
-    end
-    File.open(model.plist_path, 'w') { |file| file.write(builder.to_xml(:indent => 4, :encoding => 'UTF-8')) }
-  end
-
 end

@@ -6,7 +6,8 @@ class Build < ActiveRecord::Base
   attr_accessible :build_number, :release_notes, :version, :app_id, :upload_id
 
   def plist_url
-    self.upload.file.url.gsub(self.upload.file.file.filename, '') + self.ipa.name + '.plist'
+    #self.upload.file.url.gsub(self.upload.file.file.filename, '') + self.ipa.name + '.plist'
+    "/build-#{self.id}.plist"
   end
 
   def plist_path
@@ -15,6 +16,10 @@ class Build < ActiveRecord::Base
 
   def ipa
     IpaReader::IpaFile.new(self.upload.file.path)
+  end
+
+  def ipa_url
+    Rails.configuration.root_domain + self.upload.file.url
   end
 
   def friendly_create_at

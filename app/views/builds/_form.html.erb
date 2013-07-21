@@ -24,10 +24,12 @@
       <% end %>
     </select>
   </div>
-  <div class="field file-drag">
-    <%= f.label :file %><br />
-    <%#= f.file_field :file %>
-    drag .ipa file here
+  <div class="row">
+    <div class="field file-drag span5">
+      <%= f.label :file %><br />
+      <%#= f.file_field :file %>
+      drag .ipa file here
+    </div>
   </div>
   <div class="row">
     <div class="progress progress-striped active hidden span5" id="build_upload_progress">
