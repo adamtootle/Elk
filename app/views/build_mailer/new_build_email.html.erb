@@ -8,10 +8,10 @@
       Install the new build at <%= AppConfig.host + app_build_path(:appname => @build.app.name, :build_id => @build.id) %>
     </p>
 
+    <br />
+
     <p>
-      What's new:
-      <br />
-      <br />
+      <h2>What's new:</h2>
       <%= @build.release_notes %>
     </p>
   </body>

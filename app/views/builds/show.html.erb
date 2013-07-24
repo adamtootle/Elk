@@ -1,20 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Version:</b>
-  <%= @build.version %>
+  <%= link_to "<< Back to #{@build.app.name}", app_path(@build.app) %>
 </p>
 
-<p>
-  <b>Build number:</b>
-  <%= @build.build_number %>
-</p>
+<h4><%= "#{@build.app.name} #{@build.version} (##{@build.build_number})" %></h4>
 
 <p>
   <b>Release notes:</b>
-  <%= @build.release_notes %>
+  <p><%= @build.release_notes %></p>
 </p>
 
-
-<%= link_to 'Edit', edit_build_path(@build) %> |
-<%= link_to 'Back', builds_path %>
+<a href="itms-services://?action=download-manifest&url=<%= AppConfig.host + @build.app.builds.last.plist_url %>"
+  class="btn btn-primary hidden-desktop">
+    Install <%= "#{@build.version} (##{@build.build_number})" %>
+</a>
