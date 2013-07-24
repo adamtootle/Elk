@@ -29,7 +29,7 @@
           <%= build.release_notes %>
         </td>
         <td>
-          <a href="itms-services://?action=download-manifest&url=<%= Rails.configuration.root_domain + build.plist_url %>" class="btn btn-primary hidden-desktop">
+          <a href="itms-services://?action=download-manifest&url=<%= AppConfig.host + build.plist_url %>" class="btn btn-primary hidden-desktop">
             Install
           </a>
         </td>

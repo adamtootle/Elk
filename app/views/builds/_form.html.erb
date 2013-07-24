@@ -39,7 +39,13 @@
   <%= f.text_field :version, :class => :hidden %>
   <%= f.text_field :build_number, :class => :hidden %>
   <input id="upload_id" name="upload_id" type="text" class="hidden" />
-  <div class="actions">
+
+  <label class="checkbox">
+    <input type="checkbox" value="yes" name="notify_users" checked="checked">
+    Notify users
+  </label>
+
+  <div class="actions spacer">
     <%= f.submit :id => "build_submit", :class => "btn", :disabled => :disabled %>
   </div>
 <% end %>

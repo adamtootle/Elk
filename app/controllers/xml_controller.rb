@@ -17,7 +17,7 @@ class XmlController < ApplicationController
           xml.key "PayloadContent"
           xml.dict {
             xml.key "URL"
-            xml.string Rails.configuration.root_domain + "/register_device"
+            xml.string AppConfig.host + "/register_device"
             xml.key "DeviceAttributes"
             xml.array {
               xml.string "UDID"

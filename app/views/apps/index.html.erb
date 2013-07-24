@@ -23,7 +23,7 @@
         </td>
         <td>
           <% if(app.builds.count > 0) %>
-            <a href="itms-services://?action=download-manifest&url=<%= Rails.configuration.root_domain + app.builds.last.plist_url %>" class="btn btn-primary hidden-desktop">
+            <a href="itms-services://?action=download-manifest&url=<%= AppConfig.host + app.builds.last.plist_url %>" class="btn btn-primary hidden-desktop">
               Install Latest Version
             </a>
           <% end %>

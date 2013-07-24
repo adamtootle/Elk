@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Install the new build at <%= AppConfig.host + app_build_path(:appname => @build.app.name, :build_id => @build.id) %>
+    </p>
+
+    <p>
+      What's new:
+      <br />
+      <br />
+      <%= @build.release_notes %>
+    </p>
+  </body>
+</html>

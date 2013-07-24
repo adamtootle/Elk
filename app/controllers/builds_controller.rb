@@ -16,7 +16,11 @@ class BuildsController < ApplicationController
   # GET /builds/1
   # GET /builds/1.json
   def show
-    @build = Build.find(params[:id])
+    if params.has_key? :appname
+      @build = Build.find(params[:build_id])
+    else
+      @build = Build.find(params[:id])
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -56,6 +60,9 @@ class BuildsController < ApplicationController
       if @build.save
         upload.build_id = @build.id
         upload.save
+        if(params[:notify_users] == 'yes')
+          BuildMailer.new_build_email(@build).deliver
+        end
         format.html { redirect_to @build, notice: 'Build was successfully created.' }
         format.json { render json: @build, status: :created, location: @build }
       else

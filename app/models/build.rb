@@ -19,7 +19,7 @@ class Build < ActiveRecord::Base
   end
 
   def ipa_url
-    Rails.configuration.root_domain + self.upload.file.url
+    AppConfig.host + self.upload.file.url
   end
 
   def friendly_create_at
