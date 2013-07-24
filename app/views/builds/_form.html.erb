@@ -50,46 +50,47 @@
   </div>
 <% end %>
 
-<script src="/assets/dropzone.js"></script>
-<script type="text/javascript">
-  Dropzone.options.fileDrag = {
-    init: function() {
-      this.on("dragenter", function(file){
-        $("#build_file").parent().addClass("file-drag-hover");
-      });
-      this.on("dragleave", function(file){
-        $("#build_file").parent().removeClass("file-drag-hover");
-      });
-      this.on("addedfile", function(file){
-        console.log('added file');
-      });
-    }
-  };
-  $(document).ready(function(){
-    var myDropzone = new Dropzone(".file-drag", {
-      url: "/builds/upload", 
-      headers: {
-        'X-CSRF-Token':$('meta[name="csrf-token"]').attr('content')
-      },
-      paramName: 'build_upload[file]',
-      sending: function(){
-        $("#build_upload_progress").removeClass('hidden');
-        console.log('sending');
-      },
-      uploadprogress: function(file, progress, bytessent){
-        $("#build_upload_progress .bar").css('width', progress + '%');
-        if(progress == 100)
-        {
-          setTimeout(function(){
-            $("#build_upload_progress").addClass('hidden');
-          }, 1000);
-        }
-      },
-      success: function(file, response){
-        $("#upload_id").val(response.id);
-        $("#build_submit").attr('disabled', false)
-        $(".dz-preview").removeClass('dz-processing').addClass('dz-success');
+<% content_for :inline_scripts do %>
+  <script type="text/javascript">
+    Dropzone.options.fileDrag = {
+      init: function() {
+        this.on("dragenter", function(file){
+          $("#build_file").parent().addClass("file-drag-hover");
+        });
+        this.on("dragleave", function(file){
+          $("#build_file").parent().removeClass("file-drag-hover");
+        });
+        this.on("addedfile", function(file){
+          console.log('added file');
+        });
       }
+    };
+    $(document).ready(function(){
+      var myDropzone = new Dropzone(".file-drag", {
+        url: "/builds/upload", 
+        headers: {
+          'X-CSRF-Token':$('meta[name="csrf-token"]').attr('content')
+        },
+        paramName: 'build_upload[file]',
+        sending: function(){
+          $("#build_upload_progress").removeClass('hidden');
+          console.log('sending');
+        },
+        uploadprogress: function(file, progress, bytessent){
+          $("#build_upload_progress .bar").css('width', progress + '%');
+          if(progress == 100)
+          {
+            setTimeout(function(){
+              $("#build_upload_progress").addClass('hidden');
+            }, 1000);
+          }
+        },
+        success: function(file, response){
+          $("#upload_id").val(response.id);
+          $("#build_submit").attr('disabled', false)
+          $(".dz-preview").removeClass('dz-processing').addClass('dz-success');
+        }
+      });
     });
-  });
-</script>
+  </script>
+<% end %>

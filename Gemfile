@@ -27,6 +27,7 @@ gem 'ipa_reader'
 gem 'nokogiri'
 gem 'devise'
 gem 'sendgrid'
+gem 'thin'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
