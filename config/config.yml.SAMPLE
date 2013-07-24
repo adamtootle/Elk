@@ -1,8 +1,12 @@
 defaults: &defaults
   storage: 'file'
+  sendgrid_username: ''
+  sendgrid_password: ''
+  sendgrid_domain: ''
 
 development:
   <<: *defaults
+  host: ''
 
 test:
   <<: *defaults
