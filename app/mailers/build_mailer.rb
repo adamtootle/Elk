@@ -1,7 +1,7 @@
 class BuildMailer < ActionMailer::Base
   include SendGrid
 
-  default from: "build@elkapp.com"
+  default from: AppConfig.sendgrid_from_address
 
   def new_build_email(build)
     raise "build is nil in BuildMailer.new_build_email" unless !build.nil?

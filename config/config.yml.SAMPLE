@@ -3,6 +3,7 @@ defaults: &defaults
   sendgrid_username: ''
   sendgrid_password: ''
   sendgrid_domain: ''
+  sendgrid_from_address: ''
 
 development:
   <<: *defaults
