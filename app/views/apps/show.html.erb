@@ -2,7 +2,13 @@
 
 <br />
 
-<%= link_to "+ new build", new_build_path , :class => "visible-desktop" %>
+<p>
+  <%= link_to "+ new build", new_build_path, :class => "visible-desktop" %>
+</p>
+
+<p>
+  <%= link_to "Users", app_users_path(:appname => @app.name), :class => "visible-desktop" %>
+</p>
 
 <br />
 <br />

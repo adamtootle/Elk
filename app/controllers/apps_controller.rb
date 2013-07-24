@@ -89,4 +89,38 @@ class AppsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def users
+    @app = App.where(:name => params[:appname]).first
+    respond_to do |format|
+      format.html 
+      format.json { render json: {} }
+    end
+  end
+
+  def new_user
+    @app = App.where(:name => params[:appname]).first
+    users = User.where(:email => params[:user][:email])
+    if(users.count > 0)
+      user = users.first
+    else
+      user = User.new(params[:user])
+      user.password = SecureRandom.hex(4)
+      user.password_confirmation = user.password
+    end
+
+    if !user.apps.map(&:id).include?(@app.id)
+      user.apps << @app
+    end
+
+    respond_to do |format|
+      if user.save
+        format.html { render :template => "apps/users", notice: 'User was added.' }
+        format.json { render json: {} }
+      else
+        format.html { render :template => "apps/users", notice: 'Oops..something went wrong.' }
+        format.json { render json: user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end

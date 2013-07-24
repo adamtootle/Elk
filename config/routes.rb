@@ -12,6 +12,8 @@ Elk::Application.routes.draw do
   post 'register_device' => 'xml#register_device'
   post '/builds/upload' => 'build_uploads#new'
   get '/apps/:appname/builds/:build_id' => 'builds#show', :as => :app_build
+  get '/apps/:appname/users' => 'apps#users', :as => :app_users
+  post '/apps/:appname/users' => 'apps#new_user', :as => :new_app_user
 
   devise_for :users, :skip => [:sessions]
   as :user do
