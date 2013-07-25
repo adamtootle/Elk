@@ -16,7 +16,7 @@
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>View</th>
+      <th></th>
       <th>
         <span class="visible-desktop">
           Date
@@ -40,6 +40,8 @@
       <tr>
         <td>
           <%= link_to "View", app_build_path(:appname => @app.name, :build_id => build.id) %>
+          /
+          <%= link_to "Delete", build_path(build), :confirm => "Are you sure?", :method => :delete %>
         </td>
         <td>
           <span class="visible-desktop">

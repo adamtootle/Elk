@@ -92,10 +92,11 @@ class BuildsController < ApplicationController
   # DELETE /builds/1.json
   def destroy
     @build = Build.find(params[:id])
+    @build.upload.destroy
     @build.destroy
 
     respond_to do |format|
-      format.html { redirect_to builds_url }
+      format.html { redirect_to app_path(@build.app) }
       format.json { head :no_content }
     end
   end
