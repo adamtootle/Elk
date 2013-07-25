@@ -16,7 +16,7 @@ class BuildsController < ApplicationController
   # GET /builds/1
   # GET /builds/1.json
   def show
-    if params.has_key? :appname
+    if params.has_key? :build_id
       @build = Build.find(params[:build_id])
     else
       @build = Build.find(params[:id])
@@ -63,7 +63,7 @@ class BuildsController < ApplicationController
         if(params[:notify_users] == 'yes')
           BuildMailer.new_build_email(@build).deliver
         end
-        format.html { redirect_to app_build_path(:appname => @build.app.name, :build_id => @build.id), notice: 'Build was successfully created.' }
+        format.html { redirect_to app_build_path(@build.app, :build_id => @build.id), notice: 'Build was successfully created.' }
         format.json { render json: @build, status: :created, location: @build }
       else
         format.html { render action: "new" }

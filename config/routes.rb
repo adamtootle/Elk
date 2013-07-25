@@ -11,9 +11,9 @@ Elk::Application.routes.draw do
   get '/build-:id.plist' => 'xml#plist'
   post 'register_device' => 'xml#register_device'
   post '/builds/upload' => 'build_uploads#new'
-  get '/apps/:appname/builds/:build_id' => 'builds#show', :as => :app_build
-  get '/apps/:appname/users' => 'apps#users', :as => :app_users
-  post '/apps/:appname/users' => 'apps#new_user', :as => :new_app_user
+  get '/apps/:id/builds/:build_id' => 'builds#show', :as => :app_build
+  get '/apps/:id/users' => 'apps#users', :as => :app_users
+  post '/apps/:id/users' => 'apps#new_user', :as => :new_app_user
 
   devise_for :users, :skip => [:sessions]
   as :user do
@@ -21,8 +21,6 @@ Elk::Application.routes.draw do
     post 'login' => 'devise/sessions#create', :as => :user_session
     get 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
-
-  get '/:appname' => 'apps#show'
 
   root :to => redirect('/apps')
   

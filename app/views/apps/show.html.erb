@@ -3,11 +3,7 @@
 <br />
 
 <p>
-  <%= link_to "+ new build", new_build_path, :class => "visible-desktop" %>
-</p>
-
-<p>
-  <%= link_to "Users", app_users_path(:appname => @app.name), :class => "visible-desktop" %>
+  <%= link_to "Users", app_users_path(@app), :class => "visible-desktop" %>
 </p>
 
 <br />
@@ -16,7 +12,9 @@
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th></th>
+      <th>
+        <%= link_to "Upload new build", new_build_path, :class => "visible-desktop btn" %>
+      </th>
       <th>
         <span class="visible-desktop">
           Date
@@ -39,7 +37,7 @@
     <% @app.builds.each do |build| %>
       <tr>
         <td>
-          <%= link_to "View", app_build_path(:appname => @app.name, :build_id => build.id) %>
+          <%= link_to "View", app_build_path(@app, :build_id => build.id) %>
           /
           <%= link_to "Delete", build_path(build), :confirm => "Are you sure?", :method => :delete %>
         </td>

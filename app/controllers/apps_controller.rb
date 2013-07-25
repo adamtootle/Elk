@@ -16,11 +16,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
-    if(params.has_key?(:id))
-      @app = App.find_by_name(params[:id])
-    else
-      @app = App.where("lower(name) = ?", params[:appname].downcase).first
-    end
+    @app = App.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -91,7 +87,7 @@ class AppsController < ApplicationController
   end
 
   def users
-    @app = App.where(:name => params[:appname]).first
+    @app = App.find(params[:id])
     respond_to do |format|
       format.html 
       format.json { render json: {} }
@@ -99,7 +95,7 @@ class AppsController < ApplicationController
   end
 
   def new_user
-    @app = App.where(:name => params[:appname]).first
+    @app = App.find(params[:id])
     users = User.where(:email => params[:user][:email])
     if(users.count > 0)
       user = users.first

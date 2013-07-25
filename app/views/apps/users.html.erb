@@ -10,7 +10,7 @@
 
 <div class="row hidden new_app_user_form_container">
   <div class="span4">
-    <%= form_for :form, :url => new_app_user_path(:appname => @app.name) do |f| %>
+    <%= form_for :form, :url => new_app_user_path(@app) do |f| %>
       <p>
         <label>Email:</label>
         <input type="text" name="user[email]" class="new_app_user_email" />

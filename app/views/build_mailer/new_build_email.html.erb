@@ -5,7 +5,7 @@
   </head>
   <body>
     <p>
-      Install the new build at <%= AppConfig.host + app_build_path(:appname => @build.app.name, :build_id => @build.id) %>
+      Install the new build at <%= AppConfig.host + app_build_path(@build.app, :build_id => @build.id) %>
     </p>
 
     <br />
