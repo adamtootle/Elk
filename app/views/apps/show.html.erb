@@ -47,9 +47,9 @@
           </span>
         </td>
         <td><%= "#{build.version} (##{build.build_number})" %></td>
-        <td>
+        <td class="span5">
           <span class="visible-desktop">
-            <%= build.release_notes %>
+            <%= simple_format build.release_notes.truncate(100) %>
           </span>
         </td>
         <td>
