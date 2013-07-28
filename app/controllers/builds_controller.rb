@@ -32,7 +32,10 @@ class BuildsController < ApplicationController
   # GET /builds/new.json
   def new
     @build = Build.new
-    @apps = App.all
+
+    if params.has_key? :id
+      @app = App.where(:id => params[:id]).first
+    end
 
     respond_to do |format|
       format.html # new.html.erb

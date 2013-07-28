@@ -2,12 +2,6 @@
   margin-top: 30px;
 }
 
-.dz-drag-hover {
-  border-width: 2px;
-  border-color: red;
-  border-style: solid;
-}
-
 .dz-processing .dz-success-mark,
 .dz-processing .dz-error-mark,
 .dz-processing .dz-error-message {
@@ -17,4 +11,49 @@
 .dz-success .dz-error-mark,
 .dz-success .dz-error-message {
   display: none;
+}
+
+.new_build .release-notes {
+  display: none;
+}
+
+.new_build .file-drag {
+  background: #08c;
+  padding: 15px 19px;
+  transition: width 0.5s, padding 0.5s;
+}
+
+.new_build .file-drag .drop-message {
+  display: none;
+}
+
+.new_build .file-drag.dz-drag-hover {
+  padding: 0px;
+  width: 508px;
+}
+
+.new_build .file-drag.dz-drag-hover .drop-message {
+  display: inline;
+}
+
+.new_build .file-drag.dz-drag-hover .drag-message {
+  display: none;
+}
+
+.new_build .file-drag-inner {
+  width: 464px;
+  height: 160px;
+  text-align: center;
+  line-height: 160px;
+  font-size: 25px;
+  border: 3px dashed;
+  color: #ecf0f1;
+  transition: width 0.5s, height 0.5s, line-height 0.5s, border-color 0.5s;
+}
+
+.new_build .dz-drag-hover .file-drag-inner {
+  width: 502px;
+  height: 190px;
+  line-height: 190px;
+  border-color: #ecf0f1;
 }

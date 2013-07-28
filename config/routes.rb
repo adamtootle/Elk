@@ -11,6 +11,7 @@ Elk::Application.routes.draw do
   get '/build-:id.plist' => 'xml#plist'
   post 'register_device' => 'xml#register_device'
   post '/builds/upload' => 'build_uploads#new'
+  get '/apps/:id/builds/new' => 'builds#new', :as => :new_app_build
   get '/apps/:id/builds/:build_id' => 'builds#show', :as => :app_build
   get '/apps/:id/users' => 'apps#users', :as => :app_users
   post '/apps/:id/users' => 'apps#new_user', :as => :new_app_user
