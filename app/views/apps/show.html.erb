@@ -34,7 +34,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @app.builds.each do |build| %>
+    <% @app.builds.reverse.each do |build| %>
       <tr>
         <td>
           <%= link_to "View", app_build_path(@app, :build_id => build.id) %>
