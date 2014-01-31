@@ -23,6 +23,8 @@
           <option value="<%= app.id %>"><%= app.name %></option>
         <% end %>
       </select>
+    <% else %>
+      <%= f.text_field :app_id, :value => @app.id, :class => :hidden %>
     <% end %>
   </div>
   <div class="row build-upload">
