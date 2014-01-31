@@ -13,6 +13,25 @@
   display: none;
 }
 
+.dz-filename,
+.dz-size {
+  padding-top: 10px;
+  padding-right: 10px;
+  float: left;
+  font-size: 16px;
+  color: white;
+}
+
+.dz-success-mark {
+  float: left;
+  clear: left;
+  margin-top:  10px;
+}
+
+div.progress {
+  margin-top: 10px;
+}
+
 .new_build .release-notes {
   display: none;
 }
@@ -23,21 +42,9 @@
   transition: width 0.5s, padding 0.5s;
 }
 
-.new_build .file-drag .drop-message {
-  display: none;
-}
-
 .new_build .file-drag.dz-drag-hover {
   padding: 0px;
   width: 508px;
-}
-
-.new_build .file-drag.dz-drag-hover .drop-message {
-  display: inline;
-}
-
-.new_build .file-drag.dz-drag-hover .drag-message {
-  display: none;
 }
 
 .new_build .file-drag-inner {

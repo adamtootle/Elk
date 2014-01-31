@@ -32,8 +32,7 @@
       <%#= f.label :file %>
       <%#= f.file_field :file %>
       <div class="file-drag-inner">
-        <span class="drag-message">drag .ipa file here</span>
-        <span class="drop-message">drop .ipa file here</span>
+        drag .ipa file here
       </div>
     </div>
   </div>
@@ -58,19 +57,6 @@
 
 <% content_for :inline_scripts do %>
   <script type="text/javascript">
-    Dropzone.options.fileDrag = {
-      init: function() {
-        this.on("dragenter", function(file){
-          $("#build_file").parent().addClass("file-drag-hover");
-        });
-        this.on("dragleave", function(file){
-          $("#build_file").parent().removeClass("file-drag-hover");
-        });
-        this.on("addedfile", function(file){
-          console.log('added file');
-        });
-      }
-    };
     $(document).ready(function(){
       var myDropzone = new Dropzone(".file-drag", {
         url: "/builds/upload", 
@@ -78,6 +64,17 @@
           'X-CSRF-Token':$('meta[name="csrf-token"]').attr('content')
         },
         paramName: 'build_upload[file]',
+        init: function() {
+          this.on("dragenter", function(file){
+            $("div.file-drag-inner").first().html('drop .ipa file here');
+          });
+          this.on("dragleave", function(file){
+            $("div.file-drag-inner").html('drag .ipa file here');
+          });
+          this.on("addedfile", function(file){
+            console.log('added file');
+          });
+        },
         sending: function(){
           $("#build_upload_progress").removeClass('hidden');
           console.log('sending');
