@@ -3,8 +3,12 @@
   margin-bottom: 20px;
 }
 
-.bs-docs-nav .navbar-toggle .icon-bar {
-  background-color: black;
+.no-margin {
+  margin: 0px;
+}
+
+.no-padding {
+  padding: 0px;
 }
 
 .dz-processing .dz-success-mark,
@@ -53,7 +57,6 @@ div.progress {
 }
 
 .new_build .file-drag-inner {
-  width: 464px;
   height: 160px;
   text-align: center;
   line-height: 160px;

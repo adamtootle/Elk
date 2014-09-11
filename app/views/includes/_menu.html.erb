@@ -1,5 +1,5 @@
-<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
-  <div class="container">
+<header class="navbar navbar-inverse navbar-static-top" id="top" role="banner">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -10,7 +10,7 @@
       <%= link_to "Elk", root_path, :class => "navbar-brand" %>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav visible-sm">
+      <ul class="nav navbar-nav hidden-lg hidden-md">
         <% if user_signed_in? %>
           <li><%= link_to "Apps", apps_path %></li>
           <li><%= link_to "Register Device", '/elk.mobileconfig' %></li>
