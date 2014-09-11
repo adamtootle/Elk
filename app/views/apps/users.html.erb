@@ -26,6 +26,7 @@
   <thead>
     <tr>
       <th>Email</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,9 @@
       <tr>
         <td>
           <%= user.email %>
+        </td>
+        <td>
+          <%= link_to "Delete", delete_app_user_path(@app, user), :confirm => "Are you sure?", :method => :delete %>
         </td>
       </tr>
     <% end %>

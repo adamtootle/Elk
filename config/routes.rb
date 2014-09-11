@@ -15,6 +15,7 @@ Elk::Application.routes.draw do
   get '/apps/:id/builds/:build_id' => 'builds#show', :as => :app_build
   get '/apps/:id/users' => 'apps#users', :as => :app_users
   post '/apps/:id/users' => 'apps#new_user', :as => :new_app_user
+  delete '/apps/:id/users/:user_id' => 'apps#delete_user', :as => :delete_app_user
 
   devise_for :users, :skip => [:sessions]
   as :user do

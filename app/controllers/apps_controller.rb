@@ -119,4 +119,12 @@ class AppsController < ApplicationController
       end
     end
   end
+
+  def delete_user
+    app = App.find(params[:id])
+    user = User.find(params[:user_id])
+
+    user.apps.delete app
+    redirect_to app_users_path(app)
+  end
 end
