@@ -37,9 +37,14 @@
     <% @app.builds.reverse.each do |build| %>
       <tr>
         <td>
-          <%= link_to "View", app_build_path(@app, :build_id => build.id) %>
-          /
-          <%= link_to "Delete", build_path(build), :confirm => "Are you sure?", :method => :delete %>
+          <div class="hidden-lg hidden-md">
+            <%= link_to "View", app_build_path(@app, :build_id => build.id) %>
+          </div>
+          <div class="visible-lg visible-md">
+            <%= link_to "View", app_build_path(@app, :build_id => build.id) %>
+            /
+            <%= link_to "Delete", build_path(build), :confirm => "Are you sure?", :method => :delete %>
+          </div>
         </td>
         <td>
           <span class="visible-lg">
