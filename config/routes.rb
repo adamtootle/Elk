@@ -16,7 +16,7 @@ Elk::Application.routes.draw do
   get '/apps/:id/users' => 'apps#users', :as => :app_users
   post '/apps/:id/users' => 'apps#new_user', :as => :new_app_user
 
-  devise_for :users, :skip => [:sessions]
+  devise_for :users, :skip => [:sessions], :controllers => { registrations: 'users/registrations' }
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session
     post 'login' => 'devise/sessions#create', :as => :user_session
