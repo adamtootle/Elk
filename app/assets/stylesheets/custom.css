@@ -41,12 +41,8 @@ div.progress {
   margin-top: 10px;
 }
 
-.new_build .release-notes {
-  display: none;
-}
-
 .new_build .file-drag {
-  background: #08c;
+  background: #2780e3;
   padding: 15px 19px;
   transition: width 0.5s, padding 0.5s;
 }

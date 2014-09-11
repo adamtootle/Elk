@@ -1,21 +1,23 @@
-<%= form_for(@app) do |f| %>
-  <% if @app.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h2>
+<div class="col-lg-5">
+  <%= form_for(@app, :html => {:role => "form"}) do |f| %>
+    <% if @app.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h2>
 
-      <ul>
-      <% @app.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @app.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, :class => "form-control" %>
+    </div>
+    <div class="actions">
+      <%= f.submit :class => "btn btn-primary" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
