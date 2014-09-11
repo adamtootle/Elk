@@ -3,7 +3,7 @@
 <br />
 
 <p>
-  <%= link_to "Users", app_users_path(@app), :class => "visible-desktop" %>
+  <%= link_to "Users", app_users_path(@app), :class => "visible-lg visible-md" %>
 </p>
 
 <br />
@@ -13,21 +13,21 @@
   <thead>
     <tr>
       <th>
-        <%= link_to "Upload new build", new_app_build_path(@app), :class => "visible-desktop btn" %>
+        <%= link_to "Upload new build", new_app_build_path(@app), :class => "btn btn-primary visible-lg visible-md col-lg-5 col-md-5" %>
       </th>
       <th>
-        <span class="visible-desktop">
+        <span class="visible-lg visible-md">
           Date
         </span>
       </th>
       <th>Version</th>
       <th>
-        <span class="visible-desktop">
+        <span class="visible-lg visible-md">
           Release notes
         </span>
       </th>
       <th>
-        <span class="hidden-desktop">
+        <span class="hidden-lg hidden-md">
           Install
         </span>
       </th>
@@ -42,18 +42,18 @@
           <%= link_to "Delete", build_path(build), :confirm => "Are you sure?", :method => :delete %>
         </td>
         <td>
-          <span class="visible-desktop">
+          <span class="visible-lg">
             <%= build.friendly_create_at %>
           </span>
         </td>
         <td><%= "#{build.version} (##{build.build_number})" %></td>
         <td class="span5">
-          <span class="visible-desktop">
+          <span class="visible-lg">
             <%= simple_format build.release_notes.truncate(100) if build.release_notes %>
           </span>
         </td>
         <td>
-          <span class="hidden-desktop">
+          <span class="hidden-lg">
             <a href="itms-services://?action=download-manifest&url=<%= AppConfig.host + build.plist_url %>" class="btn btn-primary">
               Install
             </a>

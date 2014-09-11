@@ -3,6 +3,10 @@
   margin-bottom: 20px;
 }
 
+.bs-docs-nav .navbar-toggle .icon-bar {
+  background-color: black;
+}
+
 .dz-processing .dz-success-mark,
 .dz-processing .dz-error-mark,
 .dz-processing .dz-error-message {

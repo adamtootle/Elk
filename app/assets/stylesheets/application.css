@@ -10,6 +10,6 @@
  *
  *= require_self
  *= require bootstrap.min
- *= require bootstrap-responsive.min
+ *= require bootstrap-theme.min
  *= require custom
  */

@@ -4,7 +4,7 @@
     <title>Elk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -25,12 +25,12 @@
       </p>
     <% end %>
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="span2 visible-desktop spacer">
+        <div class="col-lg-2 col-md-2 visible-lg visible-md spacer">
           <%= render 'includes/sidemenu' %>
         </div>
-        <div class="span9 spacer">
+        <div class="col-lg-10 col-md-10 spacer">
           <%= yield =%>
         </div>
       </div>

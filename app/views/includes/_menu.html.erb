@@ -1,24 +1,23 @@
-<div class="navbar navbar-static-top">
-  <div class="navbar-inner">
-    <div class="container">
-    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </a>
-
-      <%= link_to "Elk", root_path, :class => "brand" %>
-
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <% if user_signed_in? %>
-            <li class="visible-phone"><%= link_to "Apps", apps_path %></li>
-            <li class="visible-phone"><%= link_to "Register Device", '/elk.mobileconfig' %></li>
-            <li class="visible-phone"><%= link_to "Me", edit_user_registration_path(current_user) %></li>
-            <li class="visible-phone"><%= link_to "Logout", destroy_user_session_path %></li>
-          <% end %>
-        </ul>
-      </div>
+      </button>
+      <%= link_to "Elk", root_path, :class => "navbar-brand" %>
     </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav visible-sm">
+        <% if user_signed_in? %>
+          <li><%= link_to "Apps", apps_path %></li>
+          <li><%= link_to "Register Device", '/elk.mobileconfig' %></li>
+          <li><%= link_to "Me", edit_user_registration_path(current_user) %></li>
+          <li><%= link_to "Logout", destroy_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
   </div>
-</div>
+</header>
