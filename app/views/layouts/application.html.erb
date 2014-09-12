@@ -19,17 +19,19 @@
     <% end %>
 
     <% if(!alert.nil?) %>
-      <p class="alert">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <div class="alert alert-dismissable alert-danger visible-lg visible-md">
+        <button type="button" class="close" data-dismiss="alert">×</button>
         <%= alert %>
-      </p>
+      </div>
     <% end %>
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-2 col-md-2 visible-lg visible-md spacer">
-          <%= render 'includes/sidemenu' %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="col-lg-2 col-md-2 visible-lg visible-md spacer">
+            <%= render 'includes/sidemenu' %>
+          </div>
+        <% end %>
         <div class="col-lg-10 col-md-10 spacer">
           <%= yield =%>
         </div>
