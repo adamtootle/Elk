@@ -1,0 +1,69 @@
+<div class="col-lg-5">
+  <a href="#" id="new-distribution-list">New Distribution List</a>
+
+  <div class="clearfix"></div>
+
+  <div class="new-distribution-list-container" style="display:none;">
+    <%= form_for :form, :url => new_app_distribution_list_path(@app) do |f| %>
+      <div class="form-group">
+        <input type="text"
+                class="form-control"
+                id="distribution-list-name"
+                name="distribution_list[name]"
+                placeholder="distribution list name">
+      </div>
+      <button type="submit" class="btn btn-primary">Add List</button>
+    <% end %>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <% @app.distribution_lists.each do |list| %>
+
+    <h2 class="dist-list-title"><%= list.name %> <%= link_to 'delete', delete_dist_list_path(@app, list), method: :delete, data: { confirm: 'Are you sure?' } %></h2>
+
+    <a href="#" class="add-new-user" data-list-id="<%= list.id %>">Add User</a>
+
+    <div class="new-list-user-container" style="display:none;" data-list-id="<%= list.id %>">
+      <%= form_for :form, :url => new_dist_list_user_path(@app) do |f| %>
+      <input type="hidden" value="<%= list.id %>" name="list_id" />
+        <div class="form-group">
+          <input type="email"
+                  class="form-control"
+                  name="user[email]"
+                  placeholder="email address">
+        </div>
+        <button type="submit" class="btn btn-primary">Add User</button>
+      <% end %>
+    </div>
+
+    <table class="table table-striped table-hover ">
+      <tbody>
+        <% list.users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= link_to 'Delete', delete_dist_list_user_path(@app, list, user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% end %>
+</div>
+
+<% content_for :inline_scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#new-distribution-list").on('click', function(ev){
+        ev.preventDefault();
+        $(".new-distribution-list-container").toggle();
+      });
+
+      $(".add-new-user").on('click', function(ev){
+        ev.preventDefault();
+
+        $(".new-list-user-container[data-list-id='" + $(this).data('list-id') + "']").toggle();
+      });
+    });
+  </script>
+<% end %>

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
          :token_authenticatable
 
   has_and_belongs_to_many :apps
+  has_and_belongs_to_many :dist_lists
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me

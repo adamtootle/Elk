@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719072540) do
+ActiveRecord::Schema.define(:version => 20140912014840) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(:version => 20130719072540) do
     t.datetime "updated_at",    :null => false
     t.integer  "app_id"
   end
+
+  create_table "dist_lists", :force => true do |t|
+    t.integer  "app_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+  end
+
+  create_table "dist_lists_users", :id => false, :force => true do |t|
+    t.integer "dist_list_id"
+    t.integer "user_id"
+  end
+
+  add_index "dist_lists_users", ["dist_list_id", "user_id"], :name => "index_dist_lists_users_on_dist_list_id_and_user_id"
+  add_index "dist_lists_users", ["user_id"], :name => "index_dist_lists_users_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

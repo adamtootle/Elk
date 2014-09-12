@@ -127,4 +127,64 @@ class AppsController < ApplicationController
     user.apps.delete app
     redirect_to app_users_path(app)
   end
+
+  def distribution_lists
+    @app = App.find(params[:id])
+  end
+
+  def new_distribution_list
+    app = App.find(params[:id])
+
+    dist_list = DistList.new
+    dist_list.name = params[:distribution_list][:name]
+    dist_list.app = app
+    dist_list.save
+
+    redirect_to app_distribution_lists_path(app)
+  end
+
+  def new_dist_list_user
+    app = App.find(params[:id])
+    dist_list = DistList.find(params[:list_id])
+
+    users = User.where(:email => params[:user][:email])
+
+    if(users.count > 0)
+      user = users.first
+    else
+      user = User.new(params[:user])
+      user.password = SecureRandom.hex(4)
+      user.password_confirmation = user.password
+    end
+
+    if !user.apps.map(&:id).include?(app.id)
+      user.apps << app
+    end
+
+    if !user.dist_lists.map(&:id).include?(dist_list.id)
+      user.dist_lists << dist_list
+    end
+
+    redirect_to app_distribution_lists_path(app)
+  end
+
+  def delete_dist_list_user
+    dist_list = DistList.find(params[:list_id])
+    user = User.find(params[:user_id])
+    dist_list.users.delete user
+
+    app = App.find(params[:app_id])
+    redirect_to app_distribution_lists_path(app)
+  end
+
+  def delete_dist_list
+    list = DistList.find(params[:list_id])
+
+    list.users.delete_all
+    list.destroy
+
+    app = App.find(params[:app_id])
+
+    redirect_to app_distribution_lists_path(app)
+  end
 end

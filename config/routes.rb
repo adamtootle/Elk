@@ -16,6 +16,11 @@ Elk::Application.routes.draw do
   get '/apps/:id/users' => 'apps#users', :as => :app_users
   post '/apps/:id/users' => 'apps#new_user', :as => :new_app_user
   delete '/apps/:id/users/:user_id' => 'apps#delete_user', :as => :delete_app_user
+  get '/apps/:id/lists' => 'apps#distribution_lists', :as => :app_distribution_lists
+  post '/apps/:id/lists' => 'apps#new_distribution_list', :as => :new_app_distribution_list
+  post '/apps/:id/lists/users' => 'apps#new_dist_list_user', :as => :new_dist_list_user
+  delete '/apps/:app_id/lists/:list_id/users/:user_id' => 'apps#delete_dist_list_user', :as => :delete_dist_list_user
+  delete '/apps/:app_id/lists/:list_id' => 'apps#delete_dist_list', :as => :delete_dist_list
 
   devise_for :users, :skip => [:sessions]
   as :user do

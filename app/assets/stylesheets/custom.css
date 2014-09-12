@@ -67,3 +67,12 @@ div.progress {
   line-height: 190px;
   border-color: #ecf0f1;
 }
+
+.dist-list-title a {
+  font-size: 20px;
+  display: none;
+}
+
+.dist-list-title:hover a {
+  display: inline;
+}
