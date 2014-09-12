@@ -35,6 +35,7 @@
   float: left;
   clear: left;
   margin-top:  10px;
+  width: 100%;
 }
 
 div.progress {
@@ -49,7 +50,6 @@ div.progress {
 
 .new_build .file-drag.dz-drag-hover {
   padding: 0px;
-  width: 508px;
 }
 
 .new_build .file-drag-inner {
@@ -63,7 +63,6 @@ div.progress {
 }
 
 .new_build .dz-drag-hover .file-drag-inner {
-  width: 502px;
   height: 190px;
   line-height: 190px;
   border-color: #ecf0f1;

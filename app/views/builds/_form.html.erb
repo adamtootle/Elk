@@ -41,10 +41,18 @@
     </div>
 
     <div class="upload-progress-container">
-      <div class="progress progress-striped active hidden col-lg-5" id="build_upload_progress">
-        <div class="bar" style="width: 0%;"></div>
+      <div class="progress hidden" id="build_upload_progress">
+        <div class="progress-bar"
+              role="progressbar"
+              style="width: 0%">
+        </div>
       </div>
     </div>
+
+    <div class="alert alert-dismissable alert-success hidden" id="upload-success">
+      Build uploaded successfully!
+    </div>
+</div>
     
     <%= f.text_field :version, :class => :hidden %>
     <%= f.text_field :build_number, :class => :hidden %>
@@ -90,15 +98,17 @@
         },
         sending: function(){
           $("#build_upload_progress").removeClass('hidden');
-          console.log('sending');
         },
         uploadprogress: function(file, progress, bytessent){
-          $("#build_upload_progress .bar").css('width', progress + '%');
+          $("#build_upload_progress .progress-bar").css('width', progress + '%');
         },
         success: function(file, response){
           $("#upload_id").val(response.id);
           $("#build_submit").attr('disabled', false)
+          $("#build_upload_progress").addClass('hidden');
           $(".dz-preview").removeClass('dz-processing').addClass('dz-success');
+          $(".file-drag").hide();
+          $("#upload-success").removeClass('hidden');
         }
       });
     });
