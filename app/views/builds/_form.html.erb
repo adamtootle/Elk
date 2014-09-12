@@ -56,17 +56,19 @@
     
     <%= f.text_field :version, :class => :hidden %>
     <%= f.text_field :build_number, :class => :hidden %>
+    <input id="upload_id" name="upload_id" type="text" class="hidden" />
 
     <div class="clearfix"></div>
     
     <div class="col-lg-5">
-      <input id="upload_id" name="upload_id" type="text" class="hidden" />
 
-      <label class="checkbox">
-        <input type="checkbox" value="yes" name="notify_users" checked="checked">
-        Notify users
-      </label>
-    </div>
+      <% @app.distribution_lists.each do |list| %>
+        <label class="checkbox">
+          <input type="checkbox" value="yes" name="notify_dist_list[<%= list.id %>]" checked="checked">
+          Notify <%= list.name %>
+        </label>
+      <% end %>
+    </div>  
 
     <div class="clearfix"></div>
 

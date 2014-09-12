@@ -63,8 +63,11 @@ class BuildsController < ApplicationController
       if @build.save
         upload.build_id = @build.id
         upload.save
-        if(params[:notify_users] == 'yes')
-          BuildMailer.new_build_email(@build).deliver
+        params[:notify_dist_list].keys.each do |key|
+          if params[:notify_dist_list][key] == "yes"
+            dist_list = DistList.find(key)
+            BuildMailer.new_build_email(@build, dist_list).deliver
+          end
         end
         format.html { redirect_to app_build_path(@build.app, :build_id => @build.id), notice: 'Build was successfully created.' }
         format.json { render json: @build, status: :created, location: @build }

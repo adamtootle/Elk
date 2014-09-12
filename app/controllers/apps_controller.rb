@@ -155,6 +155,7 @@ class AppsController < ApplicationController
       user = User.new(params[:user])
       user.password = SecureRandom.hex(4)
       user.password_confirmation = user.password
+      user.save
     end
 
     if !user.apps.map(&:id).include?(app.id)
