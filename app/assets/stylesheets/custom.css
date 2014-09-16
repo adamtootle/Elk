@@ -76,3 +76,17 @@ div.progress {
 .dist-list-title:hover a {
   display: inline;
 }
+
+.sortable .handle {
+  cursor: move;
+}
+
+.sortable-dragging {
+
+}
+
+.sortable-placeholder {
+  border: 1px dashed #CCC;
+	background: none;
+  height: 25px;
+}

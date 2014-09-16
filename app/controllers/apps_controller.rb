@@ -5,7 +5,7 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    @apps = current_user.apps
+    @apps = current_user.apps.sort! {|x,y| x.menu_order <=> y.menu_order}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -89,7 +89,7 @@ class AppsController < ApplicationController
   def users
     @app = App.find(params[:id])
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: {} }
     end
   end
@@ -187,5 +187,17 @@ class AppsController < ApplicationController
     app = App.find(params[:app_id])
 
     redirect_to app_distribution_lists_path(app)
+  end
+
+  def update_apps_order
+    params[:app_ids].each do |id|
+      app = App.find(id)
+      app.menu_order = params[:app_ids].find_index(id)
+      app.save
+    end
+
+    respond_to do |format|
+      format.json { render json: {:success => true} }
+    end
   end
 end

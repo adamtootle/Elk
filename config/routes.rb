@@ -2,7 +2,7 @@ Elk::Application.routes.draw do
 
   get "build_uploads/new"
 
-  get "build_upload/new"
+  put '/apps/reorder' => 'apps#update_apps_order', :as => :apps_order
 
   resources :builds
   resources :apps
@@ -30,7 +30,7 @@ Elk::Application.routes.draw do
   end
 
   root :to => redirect('/apps')
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
