@@ -1,16 +1,18 @@
-## Elk
+== Elk
 
 This is a very simple Rails app for self-hosted OTA iOS build distribution.
 
-## Screenshots
+== Screenshots
 
-**Desktop**
+==== Desktop
 
-![](https://i.cloudup.com/wVCrLFplZt-3000x3000.png)
-![](https://i.cloudup.com/3NKejweFKK-3000x3000.png)
+https://i.cloudup.com/wVCrLFplZt-3000x3000.png
+
+https://i.cloudup.com/3NKejweFKK-3000x3000.png
 
 
-**Mobile**
+==== Mobile
 
-![](https://i.cloudup.com/aUodTQmLN8-3000x3000.png)
-![](https://i.cloudup.com/6YyfNJYIiJ-3000x3000.png)
+https://i.cloudup.com/aUodTQmLN8-3000x3000.png
+
+https://i.cloudup.com/6YyfNJYIiJ-3000x3000.png
