@@ -27,11 +27,11 @@
   </tbody>
 </table>
 
-<div class="sortable col-lg-5">
+<div class="sortable col-lg-5 visible-lg visible-md">
 
   <% @apps.each do |app| %>
     <div data-app-id="<%= app.id %>">
-      <div class="handle col-md-1">: :</div>
+      <div class="handle col-md-1 col-lg-2">: :</div>
       <%= link_to app.name, app_path(app) %>
     </div>
   <% end %>
