@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require dropzone
+//= require jquery.sortable.min
 //= require_self

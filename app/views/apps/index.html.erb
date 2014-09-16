@@ -38,14 +38,14 @@
 
 </div>
 
+<div class="clearfix"></div>
+
 <br />
 <br />
 
 <%= link_to 'Add new app', new_app_path, :class => "visible-lg visible-md" %>
 
 <% content_for :inline_scripts do %>
-  <script type="text/javascript" src="/assets/jquery.sortable.min.js"></script>
-
   <script type="text/javascript">
     $('.sortable').sortable({
       handle: '.handle'
