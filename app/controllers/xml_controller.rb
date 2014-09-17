@@ -6,6 +6,9 @@ class XmlController < ApplicationController
 
   def mobileconfig
 
+    random_string = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+    challenge_token = "#{current_user.id}_#{random_string}"
+
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.doc.create_internal_subset(
         'plist',
@@ -27,7 +30,7 @@ class XmlController < ApplicationController
               xml.string "PRODUCT"
             }
             xml.key "Challenge"
-            xml.string "challenge-test"
+            xml.string challenge_token
           }
           xml.key "PayloadOrganization"
           xml.string "ElkApp"
@@ -40,7 +43,7 @@ class XmlController < ApplicationController
           xml.key "PayloadIdentifier"
           xml.string "com.elkapp.test"
           xml.key "PayloadDescription"
-          xml.key "This temporary profile will be used to find and display your current device's UDID."
+          xml.key "This temporary profile will be used to find and display your current device's UDID. It will not be stored on your device."
           xml.key "PayloadType"
           xml.string "Profile Service"
         }
@@ -48,6 +51,11 @@ class XmlController < ApplicationController
     end
 
     @xml = builder.to_xml.html_safe
+
+    device = Device.new
+    device.user_id = current_user.id
+    device.challenge_token = random_string
+    device.save
 
   	respond_to do |format|
       format.html { render :content_type => "application/x-apple-aspen-config" }
@@ -62,17 +70,39 @@ class XmlController < ApplicationController
     xml_string = request.body.string[start_position..end_position]
     xml_doc = Nokogiri::XML(xml_string)
     hash = Hash.from_xml(xml_doc.root.children.to_xml)
-    puts hash['dict']
 
-    respond_to do |format|
-      format.html
-      format.json { render json: {} }
+    index = 0
+    device_info = {}
+    hash['dict']['key'].each do |key|
+      device_info[key] = hash['dict']['string'][index]
+      index = index + 1
     end
+
+    challenge_token = device_info['CHALLENGE'].split('_')
+
+    existing_device = Device.where(:UDID => device_info['UDID']).first
+
+    if existing_device.nil?
+      challenge_token_device = Device.where(:user_id => challenge_token[0], :challenge_token => challenge_token[1]).first
+
+      if !challenge_token_device.nil?
+        challenge_token_device.UDID = device_info['UDID']
+        challenge_token_device.model = device_info['PRODUCT']
+        challenge_token_device.challenge_token = ''
+        challenge_token_device.save
+      end
+    else
+      challenge_token_device = Device.where(:user_id => challenge_token[0], :challenge_token => challenge_token[1]).first
+      challenge_token_device.destroy
+    end
+
+    # this is hacky but it works for now and prevents an error message on the device
+    redirect_to "/"
   end
 
   def plist
     @build = Build.find(params[:id])
-    
+
     @builder = Nokogiri::XML::Builder.new do |xml|
       xml.doc.create_internal_subset(
         'plist',

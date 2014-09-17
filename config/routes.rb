@@ -21,6 +21,7 @@ Elk::Application.routes.draw do
   post '/apps/:id/lists/users' => 'apps#new_dist_list_user', :as => :new_dist_list_user
   delete '/apps/:app_id/lists/:list_id/users/:user_id' => 'apps#delete_dist_list_user', :as => :delete_dist_list_user
   delete '/apps/:app_id/lists/:list_id' => 'apps#delete_dist_list', :as => :delete_dist_list
+  delete '/devices/:id' => 'devices#destroy', :as => :destroy_device
 
   devise_for :users, :skip => [:sessions]
   as :user do

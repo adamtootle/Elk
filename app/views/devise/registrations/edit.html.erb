@@ -1,3 +1,23 @@
+<h2>My Devices</h2>
+
+<div class="list-group col-lg-5">
+  <% if current_user.devices.any? %>
+    <% current_user.devices.each do |device| %>
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading"><%= device.friendly_model %></h4>
+        <p class="list-group-item-text">UDID: <%= device.UDID %></p>
+        <p class="list-group-item-text"><%= link_to 'Delete', destroy_device_path(device), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </div>
+    <% end %>
+  <% else %>
+    You do not have any registered devices. That does not mean that you will not be able to install builds, just that we don't have any on record for reference. <span class="hidden-lg hidden-md"><a href="/elk.mobileconfig">Tap here to register your device.</a></span>
+  <% end %>
+</div>
+
+<div class="clearfix"></div>
+
+
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => "form", :class => "col-lg-5" }) do |f| %>
