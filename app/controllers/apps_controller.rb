@@ -146,6 +146,12 @@ class AppsController < ApplicationController
 
   def distribution_lists
     @app = App.find(params[:id])
+    @distribution_lists = @app.distribution_lists
+
+    emails_in_dist_lists = @distribution_lists.map(&:users).flatten
+    all_app_user_emails = @app.roles.map(&:user)
+
+    @users_without_distribution_lists = all_app_user_emails - emails_in_dist_lists
   end
 
   def new_distribution_list
@@ -163,19 +169,22 @@ class AppsController < ApplicationController
     app = App.find(params[:id])
     dist_list = DistList.find(params[:list_id])
 
-    users = User.where(:email => params[:user][:email])
+    user = User.where(:email => params[:user][:email]).first
 
-    if(users.count > 0)
-      user = users.first
-    else
+    if user.nil?
       user = User.new(params[:user])
       user.password = SecureRandom.hex(4)
       user.password_confirmation = user.password
       user.save
     end
 
-    if !user.apps.map(&:id).include?(app.id)
-      user.apps << app
+    existing_role = UserRole.where(:user_id => user.id, :app_id => app.id).first
+    if existing_role.nil?
+      role = UserRole.new
+      role.user = user
+      role.app = app
+      role.role = UserRole::ROLES[:tester]
+      role.save
     end
 
     if !user.dist_lists.map(&:id).include?(dist_list.id)

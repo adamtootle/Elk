@@ -2,7 +2,7 @@ class App < ActiveRecord::Base
 
   has_many :builds
   has_many :distribution_lists, :class_name => "DistList", :foreign_key => "app_id"
-  # has_and_belongs_to_many :users
+  has_many :roles, :class_name => "UserRole"
 
   attr_accessible :name
 

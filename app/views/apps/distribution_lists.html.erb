@@ -18,7 +18,7 @@
 
   <div class="clearfix"></div>
 
-  <% @app.distribution_lists.each do |list| %>
+  <% @distribution_lists.each do |list| %>
 
     <h2 class="dist-list-title"><%= list.name %> <%= link_to 'delete', delete_dist_list_path(@app, list), method: :delete, data: { confirm: 'Are you sure?' } %></h2>
 
@@ -48,6 +48,22 @@
       </tbody>
     </table>
 
+  <% end %>
+
+  <br />
+
+  <% if @users_without_distribution_lists.any? %>
+    <h4>Users not receiving emails</h4>
+    <table class="table table-striped table-hover ">
+      <tbody>
+        <% @users_without_distribution_lists.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
 </div>
 
