@@ -1,7 +1,7 @@
 class Build < ActiveRecord::Base
 
   belongs_to :app
-  has_one :upload, :class_name => BuildUpload
+  has_one :upload, :class_name => BuildUpload, :dependent => :destroy
 
   attr_accessible :build_number, :release_notes, :version, :app_id, :upload_id
 

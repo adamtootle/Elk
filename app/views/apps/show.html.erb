@@ -76,3 +76,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= link_to "Delete App", app_path(@app), :confirm => "Are you sure?! This can't be undone!", :method => :delete, :class => "btn btn-danger" %>

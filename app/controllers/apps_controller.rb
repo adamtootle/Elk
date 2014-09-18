@@ -87,13 +87,10 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   # DELETE /apps/1.json
   def destroy
-    @app = App.find_by_name(params[:id])
+    @app = App.find(params[:id])
     @app.destroy
 
-    respond_to do |format|
-      format.html { redirect_to apps_url }
-      format.json { head :no_content }
-    end
+    redirect_to apps_path
   end
 
   def users

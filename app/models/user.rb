@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
 
   has_many :apps
   has_and_belongs_to_many :dist_lists
-  has_many :roles, :class_name => "UserRole"
-  has_many :devices
+  has_many :roles, :class_name => "UserRole", :dependent => :destroy
+  has_many :devices, :dependent => :destroy
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
