@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140918142450) do
+ActiveRecord::Schema.define(:version => 20140918190145) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -19,14 +19,6 @@ ActiveRecord::Schema.define(:version => 20140918142450) do
     t.datetime "updated_at", :null => false
     t.integer  "menu_order"
   end
-
-  create_table "apps_users", :id => false, :force => true do |t|
-    t.integer "app_id"
-    t.integer "user_id"
-  end
-
-  add_index "apps_users", ["app_id", "user_id"], :name => "index_apps_users_on_app_id_and_user_id"
-  add_index "apps_users", ["user_id"], :name => "index_apps_users_on_user_id"
 
   create_table "build_uploads", :force => true do |t|
     t.integer  "build_id"
