@@ -4,9 +4,9 @@
   <% if current_user.devices.any? %>
     <% current_user.devices.each do |device| %>
       <% if !device.UDID.nil? %>
-        <div class="list-group-item">
+        <div class="list-group-item user-devices">
           <h4 class="list-group-item-heading"><%= device.friendly_model %></h4>
-          <p class="list-group-item-text">UDID: <%= device.UDID %></p>
+          <p class="list-group-item-text udid">UDID: <%= device.UDID %></p>
           <p class="list-group-item-text"><%= link_to 'Delete', destroy_device_path(device), method: :delete, data: { confirm: 'Are you sure?' } %></p>
         </div>
       <% end %>

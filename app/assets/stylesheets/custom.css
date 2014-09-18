@@ -98,3 +98,7 @@ table.app-users .show-devices {
 .app-user-devices {
   display: none;
 }
+
+.user-devices .udid {
+  word-break: break-all;
+}
