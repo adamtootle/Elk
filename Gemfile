@@ -28,6 +28,7 @@ gem 'nokogiri'
 gem 'devise'
 gem 'sendgrid'
 gem 'thin'
+gem 'seed_migration'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

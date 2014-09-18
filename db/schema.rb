@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140917035803) do
+ActiveRecord::Schema.define(:version => 20140918142243) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(:version => 20140917035803) do
 
   add_index "dist_lists_users", ["dist_list_id", "user_id"], :name => "index_dist_lists_users_on_dist_list_id_and_user_id"
   add_index "dist_lists_users", ["user_id"], :name => "index_dist_lists_users_on_user_id"
+
+  create_table "seed_migration_data_migrations", :force => true do |t|
+    t.string   "version"
+    t.integer  "runtime"
+    t.datetime "migrated_on"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

@@ -100,6 +100,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    seed_migration (1.0.3)
     sendgrid (1.0.1)
       json
       json
@@ -138,6 +139,7 @@ DEPENDENCIES
   nokogiri
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
+  seed_migration
   sendgrid
   sqlite3
   thin
