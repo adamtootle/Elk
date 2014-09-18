@@ -2,9 +2,14 @@
 
 <br />
 
-<p>
-  <%= link_to "Distribution Lists", app_distribution_lists_path(@app), :class => "visible-lg visible-md" %>
-</p>
+<% if current_user.is_admin_for_app @app %>
+  <p>
+    <%= link_to "Distribution Lists", app_distribution_lists_path(@app), :class => "visible-lg visible-md" %>
+  </p>
+  <p>
+    <%= link_to "Users & Devices", app_users_path(@app), :class => "visible-lg visible-md" %>
+  </p>
+<% end %>
 
 <br />
 <br />

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :apps
   has_and_belongs_to_many :dist_lists
+  has_many :roles, :class_name => "UserRole"
   has_many :devices
 
   # Setup accessible (or protected) attributes for your model
@@ -17,5 +18,15 @@ class User < ActiveRecord::Base
   def add_app app
     self.apps << app
     self.save
+  end
+
+  def is_admin_for_app app
+    role = self.roles.select{|role| role.app_id == app.id}.first
+    !role.nil? && role.role == UserRole::ROLES[:admin]
+  end
+
+  def is_tester_for_app app
+    role = UserRole.where(:app_id => app.id, :user_id => self.id).first
+    !role.nil? && role.role == UserRole::ROLES[:tester]
   end
 end

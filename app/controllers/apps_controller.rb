@@ -120,6 +120,17 @@ class AppsController < ApplicationController
     end
   end
 
+  def edit_user
+    user = User.find(params[:id])
+    respond_to do |format|
+      if user.save
+        format.json { render json: {} }
+      else
+        format.json { render json: user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def delete_user
     app = App.find(params[:id])
     user = User.find(params[:user_id])

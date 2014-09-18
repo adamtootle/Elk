@@ -26,6 +26,7 @@
   <thead>
     <tr>
       <th>Email</th>
+      <th>User Role</th>
       <th></th>
     </tr>
   </thead>
@@ -35,6 +36,7 @@
         <td>
           <%= user.email %>
         </td>
+        <td><%= @app.role_for_user(user).role %></td>
         <td>
           <%= link_to "Delete", delete_app_user_path(@app, user), :confirm => "Are you sure?", :method => :delete %>
         </td>

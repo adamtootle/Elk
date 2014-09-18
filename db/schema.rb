@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140918142243) do
+ActiveRecord::Schema.define(:version => 20140918142450) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -72,6 +72,12 @@ ActiveRecord::Schema.define(:version => 20140918142243) do
     t.string   "version"
     t.integer  "runtime"
     t.datetime "migrated_on"
+  end
+
+  create_table "user_roles", :force => true do |t|
+    t.integer "user_id"
+    t.integer "app_id"
+    t.string  "role"
   end
 
   create_table "users", :force => true do |t|
