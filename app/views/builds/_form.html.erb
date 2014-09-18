@@ -17,18 +17,7 @@
       <%= f.text_area :release_notes, :class => "form-control", :rows => 5 %>
     </div>
 
-    <div class="field">
-      <% if @app.nil? %>
-        <%= f.label :app_id %><br />
-        <select name="build[app_id]">
-          <% current_user.apps.each do |app| %>
-            <option value="<%= app.id %>"><%= app.name %></option>
-          <% end %>
-        </select>
-      <% else %>
-        <%= f.text_field :app_id, :value => @app.id, :class => :hidden %>
-      <% end %>
-    </div>
+    <%= f.text_field :app_id, :value => @app.id, :class => :hidden %>
 
     <div class="build-upload">
       <div class="field file-drag">
@@ -53,13 +42,13 @@
       Build uploaded successfully!
     </div>
 </div>
-    
+
     <%= f.text_field :version, :class => :hidden %>
     <%= f.text_field :build_number, :class => :hidden %>
     <input id="upload_id" name="upload_id" type="text" class="hidden" />
 
     <div class="clearfix"></div>
-    
+
     <div class="col-lg-5">
 
       <% @app.distribution_lists.each do |list| %>
@@ -68,7 +57,7 @@
           Notify <%= list.name %>
         </label>
       <% end %>
-    </div>  
+    </div>
 
     <div class="clearfix"></div>
 
@@ -82,7 +71,7 @@
   <script type="text/javascript">
     $(document).ready(function(){
       var myDropzone = new Dropzone(".file-drag", {
-        url: "/builds/upload", 
+        url: "/builds/upload",
         headers: {
           'X-CSRF-Token':$('meta[name="csrf-token"]').attr('content')
         },

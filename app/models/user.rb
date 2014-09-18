@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable
 
+  has_many :apps
   has_and_belongs_to_many :dist_lists
   has_many :roles, :class_name => "UserRole"
   has_many :devices
@@ -13,11 +14,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-
-  def add_app app
-    self.apps << app
-    self.save
-  end
 
   def is_admin_for_app app
     role = self.roles.select{|role| role.app_id == app.id}.first

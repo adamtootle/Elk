@@ -44,7 +44,7 @@
       <tr>
         <td><span class="glyphicon glyphicon-chevron-down show-devices" data-user-id="<%= user.id %>"></span></td>
         <td>
-          <%= user.email %>
+          <%= user.email %> <% if @app.owner == user %>(owner)<%end %>
           <div class="app-user-devices user-<%= user.id %>-devices">
             <% if user.devices.any? %>
               <strong>Devices</strong>
@@ -61,7 +61,7 @@
           </div>
         </td>
         <td>
-          <select class="user-role-select" data-user-id="<%= user.id %>">
+          <select class="user-role-select" data-user-id="<%= user.id %>" <% if @app.owner == user %>disabled="disabled"<%end %>>
             <% UserRole::ROLES.keys.each do |key| %>
               <% if UserRole::ROLES[key] == @app.role_for_user(user).role %>
                 <option value="<%= UserRole::ROLES[key] %>" selected="selected"><%= UserRole::ROLES[key] %></option>
@@ -72,7 +72,9 @@
           </select>
         </td>
         <td>
-          <%= link_to "Delete", delete_app_user_path(@app, user), :confirm => "Are you sure?", :method => :delete %>
+          <% if @app.owner != user %>
+            <%= link_to "Delete", delete_app_user_path(@app, user), :confirm => "Are you sure?", :method => :delete %>
+          <%end %>
         </td>
       </tr>
     <% end %>

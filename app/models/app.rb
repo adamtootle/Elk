@@ -1,5 +1,6 @@
 class App < ActiveRecord::Base
 
+  belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
   has_many :builds
   has_many :distribution_lists, :class_name => "DistList", :foreign_key => "app_id"
   has_many :roles, :class_name => "UserRole"

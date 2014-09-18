@@ -44,8 +44,18 @@ class AppsController < ApplicationController
   # POST /apps.json
   def create
     @app = App.new(params[:app])
+    @app.owner = current_user
 
-    current_user.add_app @app
+    all_apps = App.all.sort {|x,y| x.menu_order <=> y.menu_order}
+    @app.menu_order = all_apps.last.menu_order + 1
+
+    @app.save
+
+    role = UserRole.new
+    role.user = current_user
+    role.app = @app
+    role.role = UserRole::ROLES[:admin]
+    role.save
 
     respond_to do |format|
       if @app.save
@@ -125,8 +135,10 @@ class AppsController < ApplicationController
   end
 
   def edit_user
-    role = UserRole.where(:user_id => params[:user_id], :app_id => params[:id]).first
-    if !role.nil?
+    app = App.find(params[:id])
+    user = User.find(params[:user_id])
+    role = UserRole.where(:user_id => user.id, :app_id => params[:id]).first
+    if !role.nil? && app.owner != user
       role.role = UserRole::ROLES[params[:role].to_sym] || UserRole::ROLES[:tester]
       role.save
     end
