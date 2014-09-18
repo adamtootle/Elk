@@ -90,3 +90,11 @@ div.progress {
 	background: none;
   height: 25px;
 }
+
+table.app-users .show-devices {
+  cursor: pointer;
+}
+
+.app-user-devices {
+  display: none;
+}
