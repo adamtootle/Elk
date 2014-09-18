@@ -140,6 +140,12 @@ class AppsController < ApplicationController
     app = App.find(params[:id])
     user = User.find(params[:user_id])
 
+    app.distribution_lists.each do |list|
+      if !list.users.map(&:id).find_index(user.id).nil?
+        list.users.delete user
+      end
+    end
+
     user.roles.select{|role| role.app_id == app.id}.first.destroy
     redirect_to app_users_path(app)
   end
