@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable
 
-  has_and_belongs_to_many :apps
   has_and_belongs_to_many :dist_lists
   has_many :roles, :class_name => "UserRole"
   has_many :devices

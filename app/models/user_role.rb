@@ -5,7 +5,7 @@ class UserRole < ActiveRecord::Base
   belongs_to :app
 
   ROLES = {
-    :admin => "admin",
-    :tester => "tester"
+    :tester => "tester",
+    :admin => "admin"
   }
 end

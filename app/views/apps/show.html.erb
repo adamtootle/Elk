@@ -9,6 +9,9 @@
   <p>
     <%= link_to "Users & Devices", app_users_path(@app), :class => "visible-lg visible-md" %>
   </p>
+  <p>
+    <%= link_to "Upload new build", new_app_build_path(@app), :class => "btn btn-primary visible-lg visible-md col-lg-2 col-md-3" %>
+  </p>
 <% end %>
 
 <br />
@@ -17,8 +20,8 @@
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th class="col-lg-2 col-md-2">
-        <%= link_to "Upload new build", new_app_build_path(@app), :class => "btn btn-primary visible-lg visible-md" %>
+      <th>
+
       </th>
       <th>
         <span class="visible-lg visible-md">

@@ -5,7 +5,7 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    @apps = current_user.apps.sort! {|x,y| x.menu_order <=> y.menu_order}
+    @apps = current_user.roles.map(&:app).sort! {|x,y| x.menu_order <=> y.menu_order}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -96,17 +96,21 @@ class AppsController < ApplicationController
 
   def new_user
     @app = App.find(params[:id])
-    users = User.where(:email => params[:user][:email])
-    if(users.count > 0)
-      user = users.first
-    else
+    user = User.where(:email => params[:user][:email]).first
+    if user.nil?
       user = User.new(params[:user])
       user.password = SecureRandom.hex(4)
       user.password_confirmation = user.password
+      user.save
     end
 
-    if !user.apps.map(&:id).include?(@app.id)
-      user.apps << @app
+    existing_role = UserRole.where(:user_id => user.id, :app_id => @app.id).first
+    if existing_role.nil?
+      role = UserRole.new
+      role.user = user
+      role.app = @app
+      role.role = UserRole::ROLES[params[:user_role].to_sym] || UserRole::ROLES[:tester]
+      role.save
     end
 
     respond_to do |format|
@@ -121,13 +125,14 @@ class AppsController < ApplicationController
   end
 
   def edit_user
-    user = User.find(params[:id])
+    role = UserRole.where(:user_id => params[:user_id], :app_id => params[:id]).first
+    if !role.nil?
+      role.role = UserRole::ROLES[params[:role].to_sym] || UserRole::ROLES[:tester]
+      role.save
+    end
+
     respond_to do |format|
-      if user.save
-        format.json { render json: {} }
-      else
-        format.json { render json: user.errors, status: :unprocessable_entity }
-      end
+      format.json { render json: {} }
     end
   end
 
@@ -135,7 +140,7 @@ class AppsController < ApplicationController
     app = App.find(params[:id])
     user = User.find(params[:user_id])
 
-    user.apps.delete app
+    user.roles.select{|role| role.app_id == app.id}.first.destroy
     redirect_to app_users_path(app)
   end
 

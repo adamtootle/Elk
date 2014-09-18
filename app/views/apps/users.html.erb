@@ -10,10 +10,18 @@
 
 <div class="row hidden new_app_user_form_container">
   <div class="col-lg-5">
-    <%= form_for :form, :url => new_app_user_path(@app), :html => {:fole => "form"} do |f| %>
+    <%= form_for :form, :url => new_app_user_path(@app), :html => {:role => "form"} do |f| %>
       <p class="form-group">
         <label>Email:</label>
         <input type="text" name="user[email]" class="new_app_user_email form-control" />
+      </p>
+      <p class="form-group">
+        <label>Role:</label>
+        <select class="new-user-role-select" name="user_role">
+          <% UserRole::ROLES.keys.each do |key| %>
+            <option value="<%= UserRole::ROLES[key] %>"><%= UserRole::ROLES[key] %></option>
+          <% end %>
+        </select>
       </p>
       <p class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -36,7 +44,17 @@
         <td>
           <%= user.email %>
         </td>
-        <td><%= @app.role_for_user(user).role %></td>
+        <td>
+          <select class="user-role-select" data-user-id="<%= user.id %>">
+            <% UserRole::ROLES.keys.each do |key| %>
+              <% if UserRole::ROLES[key] == @app.role_for_user(user).role %>
+                <option value="<%= UserRole::ROLES[key] %>" selected="selected"><%= UserRole::ROLES[key] %></option>
+              <% else %>
+                <option value="<%= UserRole::ROLES[key] %>"><%= UserRole::ROLES[key] %></option>
+              <% end %>
+            <% end %>
+          </select>
+        </td>
         <td>
           <%= link_to "Delete", delete_app_user_path(@app, user), :confirm => "Are you sure?", :method => :delete %>
         </td>
@@ -56,6 +74,19 @@
         ev.preventDefault();
         $(".new_app_user_form_container").toggleClass('hidden');
         $(".new_app_user_email").focus();
+      });
+
+      $(".user-role-select").on('change', function(){
+        $.ajax({
+          type: 'PUT',
+          url: '/apps/<%= @app.id %>/users/' + $(this).data('user-id'),
+          data: {
+            role: $(this).val()
+          },
+          success: function(data){
+            console.log(data);
+          }
+        });
       });
     });
   </script>

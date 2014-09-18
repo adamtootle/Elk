@@ -1,13 +1,18 @@
 class RemoveAppsUsers < ActiveRecord::Migration
   def up
     User.all.each do |user|
-        user.apps.each do |app|
+      apps_users = ActiveRecord::Base.connection.execute("SELECT * FROM apps_users WHERE user_id=#{user.id}")
+      apps_users.each do |app_user|
+        existing_role = UserRole.where(:user_id => user.id, :app_id => app_user['app_id']).first
+
+        if existing_role.nil?
           role = UserRole.new
           role.user = user
-          role.app = app
+          role.app_id = app_user['app_id']
           role.role = UserRole::ROLES[:tester]
           role.save
         end
+      end
     end
 
     drop_table :apps_users
