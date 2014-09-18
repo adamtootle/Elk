@@ -77,4 +77,8 @@
   </tbody>
 </table>
 
-<%= link_to "Delete App", app_path(@app), :confirm => "Are you sure?! This can't be undone!", :method => :delete, :class => "btn btn-danger" %>
+<% if @app.owner == current_user %>
+  <div class="visible-lg visible-md">
+    <%= link_to "Delete App", app_path(@app), :confirm => "Are you sure?! This can't be undone!", :method => :delete, :class => "btn btn-danger" %>
+  </div>
+<% end %>
