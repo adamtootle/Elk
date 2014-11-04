@@ -100,7 +100,9 @@ class BuildsController < ApplicationController
   # DELETE /builds/1.json
   def destroy
     @build = Build.find(params[:id])
-    @build.upload.destroy
+    unless @build.upload.nil?
+      @build.upload.destroy
+    end
     @build.destroy
 
     respond_to do |format|
