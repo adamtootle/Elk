@@ -55,7 +55,7 @@ class BuildsController < ApplicationController
 
     upload = BuildUpload.where(:id => params[:upload_id]).first
     ipa = IpaReader::IpaFile.new(upload.file.path)
-    @build.version = ipa.version
+    @build.version = ipa.short_version
 
     @build.build_number = Build.where(:app_id => @build.app_id, :version => @build.version).count + 1
 
