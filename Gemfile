@@ -22,13 +22,13 @@ end
 
 gem 'jquery-rails'
 
-gem 'carrierwave'
+gem 'carrierwave', '0.7.1'
 gem 'ipa_reader', '0.7.1'
-gem 'nokogiri'
+gem 'nokogiri', '1.5.10'
 gem 'devise', '2.2.3'
-gem 'sendgrid'
-gem 'thin'
-gem 'seed_migration'
+gem 'sendgrid', '1.0.1'
+gem 'thin', '1.5.1'
+gem 'seed_migration', '1.0.3'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
