@@ -23,7 +23,7 @@ end
 gem 'jquery-rails'
 
 gem 'carrierwave'
-gem 'ipa_reader'
+gem 'ipa_reader', '0.7.1'
 gem 'nokogiri'
 gem 'devise'
 gem 'sendgrid'
