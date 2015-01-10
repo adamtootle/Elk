@@ -126,7 +126,7 @@ class XmlController < ApplicationController
               xml.key "metadata"
               xml.dict {
                 xml.key "bundle-identifier"
-                xml.string @build.ipa.bundle_identifier
+                xml.string @build.ipa.bundle_identifier + '-ios'
                 xml.key "bundle-version"
                 xml.string @build.ipa.version
                 xml.key "kind"
